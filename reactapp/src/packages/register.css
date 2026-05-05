@@ -1,0 +1,145 @@
+.Register-from{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../static/img/fon.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.zap{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    width: 580px;
+    height: 705px;
+    border-radius: 25px;
+    align-items: center;
+}
+
+.zap-h1{
+    text-align: center;
+    font-family: bold;
+    font-size: 25px;
+}
+
+.in-registr-email{
+    width: 280px;
+    padding: 8px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.425);
+}
+
+
+.line-reg{
+    display: flex;
+    justify-content: space-between;
+    width: 512px;
+    height: 60px;
+}
+
+.get-code{
+    width: 202px;
+    height: 59px;
+    border-radius: 10px;
+    background-color: #463ACB;
+    color: white;
+    font-family: bold;
+    transition: opacity 0.2s ease;
+    opacity: 1;
+    border: none;
+}
+
+.get-code:hover{
+    opacity: 0.8;
+}
+
+
+
+.p-register{
+    width: 508px;
+    margin-top: -25px
+}
+
+.pasword-reg{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;
+}
+
+.w-90px{
+    width: 480px;
+    height: 25px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 15px;
+}
+
+.reg-check{
+    display: flex;
+    justify-content: space-around;
+    width: 508px;
+}
+
+.p-register-un{
+    width: 468px;
+    height: 60px;
+}
+
+.p-register-un1{
+    font-size: 14px;
+}
+
+.checkbox{
+    width: 20px;
+}
+
+.submit-reg{
+    height: 60px;
+    background-color: #463ACB;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 8px;
+    font-family: bold;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border: none;
+    outline: none;
+    width: 508px;
+    transition: opacity 0.2s ease;
+}
+
+.submit-reg:hover{
+    opacity: 0.8;
+}
+
+.p-link-reg{
+    display: flex;
+    justify-content: space-around;
+    width: 340px;
+}
+
+.link-login{
+    color: #463ACB;
+    text-decoration: none;
+}
+
+.under-get-cod{
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.425);
+    border-radius: 8px;
+    width: 190px;
+    height: 57px;
+}

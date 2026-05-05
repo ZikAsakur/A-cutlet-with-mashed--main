@@ -1,0 +1,32 @@
+.block-analytics-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 600px;
+    flex-direction: column;
+}
+.block-analytics-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 600px;
+    flex-direction: column;
+}
+.main-analytics{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 130px;
+}
+.h2-analytics{
+    font-family: bold;
+font-weight: 700;
+font-size: 30px;
+line-height: 111%;
+text-transform: uppercase;
+text-align: center;
+color: #000;
+}

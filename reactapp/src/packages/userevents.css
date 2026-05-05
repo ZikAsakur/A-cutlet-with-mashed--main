@@ -1,0 +1,132 @@
+.pagination{
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.page:hover{
+    background-color: #463ACB;
+    color: white;
+}
+
+.active{
+    background-color: #463ACB;
+    color: white;
+}
+
+.search{
+    margin-top: 50px;
+    width: 730px;
+    height: 43px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background: #fff;
+    padding-left:10px ;
+}
+
+.loopa{
+    position: relative;
+    display: flex;
+    bottom: 32px;
+    right: 15px;
+    height: 22px;
+    width: 26px;
+    float: inline-end;
+}
+
+.date-use-event{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 550px;
+    align-self: center;
+    gap: 20px;
+}
+
+.event_title-use{
+    border-right: 3px solid #fff;
+    padding: 10px;
+    width: 882px;
+    min-height: 113px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 3px solid white;
+}
+
+.event_age_group-ev{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+}
+
+.event_bottom-useev{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-Sign{
+    width: 270px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 170px;
+}
+
+.event_button-opisani{
+    width: 200px;
+    height: 40px;
+    background-color: #463ACB;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 8px;
+    font-family: bold;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    transition: opacity 0.2s ease;
+    opacity: 1;
+}
+
+.event_button-opisani:hover{
+    opacity: 0.8;
+}
+
+.popup-content-use{
+    border-radius: 20px;
+    width: 627px;
+    height: 740px;
+    background: rgba(70, 58, 203, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.back2{
+    border-radius: 20px;
+    width: 627px;
+    height: 740px;
+    background: #fff;
+}
+
+

@@ -1,0 +1,53 @@
+footer {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    background-color: white;
+    justify-content: space-around;
+    box-shadow: 2px -2px 12px rgba(50, 51, 50, 0.5);
+    margin-top: auto;
+    width: 100%;
+    bottom: 0;
+}
+
+.info-mess{
+    display: flex;
+    align-items: center;
+    width: 280px;
+    justify-content: space-evenly;
+}
+
+.contact-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mes{
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    justify-content: space-around;
+}
+
+.year-footer{
+    color:#000000;
+    font-family: Light;
+}
+.email{
+    color:#000000;
+    font-family: Light;
+}
+.phone{
+    color:#000000;
+    font-family: Light;
+}
+
+.Telegram{
+    width: 30px;
+    height: 30px;
+}
+.VK{
+    width: 30px;
+    height: 30px;
+}

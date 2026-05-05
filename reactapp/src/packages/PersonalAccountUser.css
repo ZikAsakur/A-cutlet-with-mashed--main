@@ -1,0 +1,878 @@
+
+.GeneralDiv_PerAccUs{
+    width:1764px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 27.5px;
+    margin-left: 68.5px;
+    margin-bottom: 50px;
+}
+/*Левое меню */
+.LeftMenu_PerAccUsmain{
+    width: 331px;
+    height: 240px;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.LeftMenuButt_PerAccUs{
+    width: 262px;
+    height: px;
+}
+.ProfileButt_PerAccUs{
+    width: 261px;
+    height: 49px;
+    background-color: white;
+    border-radius: 20px;
+    color: black;
+}
+.PartButt_PerAccUs{
+    width: 261px;
+    height: 49px;
+    margin-top:21px;
+    background-color: white;
+    border-radius: 20px;
+    color: black;
+}
+
+.ProfileButt_PerAccUs.active{
+    width: 261px;
+    height: 49px;
+    background-color: #463ACB;
+    border-radius: 20px;
+    color: white;
+}
+.PartButt_PerAccUs.active{
+    width: 261px;
+    height: 49px;
+    margin-top:21px;
+    background-color: #463ACB;
+    border-radius: 20px;
+    color: white;
+}
+
+.MainDiv_PerAccUs{
+    width: 1362px;
+    height: 920px;
+}
+/*Публичные данные*/
+.GeneralPublicData_PerAccUs{
+    width: 1362px;
+    height: 172px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.PublicData_PerAccUs{
+    width: 1291px;
+    height: 107px;
+    display: flex;
+    justify-content: center;
+}
+
+.PublicInfo_PerAccUs{
+    width: 297px;
+    height: 106px;
+    border-right: 1px solid blue;
+}
+
+.PublicInfoInputs_PerAccUs{
+    width: 925px;
+    height: 107px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.PublicInputName_PerAccUs{
+    width: 925px;
+    height: 45px ;
+    border-radius: 10px;
+}
+
+.PublicInputId_PerAccUs{
+    width: 925px;
+    height: 45px ;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+
+/*Локальные данные*/
+.GeneralLocalData_PerAccUs{
+    width: 1362px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    margin-top: 22.5px;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+
+}
+
+.LocalData_PerAccUs{
+    width: 1291px;
+    height: 161px;
+    display: flex;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.LocalInfo_PerAccUs{
+    border-right: 1px solid blue;
+}
+
+.LocalInfoInputs_PerAccUs{
+    margin-left: 10px;
+}
+
+.LocalDataInputFIO_PerAccUs{
+    width: 925px;
+    height: 45px ;
+    border-radius: 10px;
+}
+
+.DivLocalInfoPhoneBirthday_PerAccUs{
+    height: 45px ;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.LocalDataInputPhoneBirthday_PerAccUs{
+    width: 435px ;
+    height: 45px ;
+    border-radius: 10px;
+}
+
+.LocalInfoGender_PerAccUs{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.dropdown_PerAccUs{
+    width: 435px;
+    height: 45px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    display:flex;
+    align-items: center;
+    padding-left: 10px;
+    border-color: blue;
+}
+
+.dropdown-list{
+    width: 168px;
+    height: 64px;
+    list-style-type: none;
+    background-color: white;
+    border: 1px solid blue;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.DivDropDownMale_PerAccUs{
+    width: 149px;
+    height: 27px;
+    margin-bottom: 1px;
+}
+
+.DropDownBorder_PerAccUs{
+    width: 149px;
+    height: 1px;
+    border-top: 1px solid blue;
+}
+
+.DivDropDownFemale_PerAccUs{
+    width: 149px;
+    height: 27px;
+}
+.DivDropDownMale_PerAccUs:hover{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+}
+
+.DivDropDownFemale_PerAccUs:hover{
+    background-color: #D9D9D9;
+    border-radius: 5px;
+}
+
+.LocalInfoEmail_PerAccUs{
+    width: 435px ;
+    height: 45px ;
+    border-radius: 10px;
+}
+
+.PGender_PerAccUs{
+    width: 390px;
+    font-family: Regular;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/*Местоположение*/
+.GeneralMainLocation_PerAccUs{
+    width: 1362px;
+    height: 233px;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    display: flex;
+    align-items: center;
+    margin-top: 22.5px;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.MainLocation_PerAccUs{
+    width: 1291px;
+    height: 178px;
+    display: flex;
+    justify-content: center;
+}
+
+.LocationInfo_PerAccUs{
+    width: 296px;
+    height: 178px;
+    border-right: 1px solid blue;
+}
+
+
+
+.LocationInputs_PerAccUs{
+    width: 925px;
+    height: 178px ;
+    display: flex;
+    flex-direction: column;
+    margin-left:10px;
+}
+
+.LocationInputContry_PerAccUs{
+    width: 925px;
+    height: 54px ;
+    border-radius: 10px;
+}
+
+.LocationInputRegion_PerAccUs{
+    width: 925px;
+    height: 54px ;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.LocationInputCity_PerAccUs{
+    width: 925px;
+    height: 54px ;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+/*Смена пароля*/
+.GeneralChangePassword_PerAccUs{
+    width: 1362px;
+    height: 150px;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    margin-top: 22.5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.ChangePassword_PerAccUs{
+    width: 1291px;
+    height: 130px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+}
+
+.ChangePasswordInfo_PerAccUs{
+    border-right:1px solid blue
+}
+
+
+.DivChange_PerrAccUs{
+    margin-left: 15px;
+}
+
+.ButtChange_PerrAccUs{
+    width: 350px;
+    height: 54px ;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: white;
+    border-color: blue;
+    font-family: Regular;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+/*Сохранить данные*/
+
+.DivSave_PerAccUs{
+    width: 253px;
+    height: 58px;
+    margin-top: 15px;
+}
+.ButtSave_PerAccUs{
+    width: 253px;
+    height: 58px;
+    background-color: #463ACB;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    
+}
+
+/*Ивенты*/
+.GeneralListParticipation_PerAccUs{
+    width: 1195px;
+    height: auto;
+}
+
+
+.card_event{
+    width: 1195px ;
+    height: 312px ;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 57.5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+
+.left_event{
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.type_event{
+    width: 530px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 5px;
+    margin-top: 25px;
+}
+
+.DivGeneralRightEvent{
+    width: 420px;
+    height: 164px;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.right_event{
+    width: 420px;
+    display: flex;
+    flex-direction: row;
+    gap:20px
+}
+
+.RightEvent_DeleteButt{
+    width:420px ;
+    height: 60px;
+    background-color: #463ACB;
+    color: white;
+    font-family: Regular;
+    font-weight: 700;
+    font-size: 24px;
+    border-radius: 15px;
+    border: none;
+}
+
+.date_event{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.h1_event{
+    font-family: Bold;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.p_event{
+    width: auto;
+    font-family: Regular;
+    font-weight: 700;
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.h1_notevent{
+    height: 920px;
+    width: auto;
+    font-family: Bold;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+/*Общие*/
+input{
+    font-family: Regular;
+    font-size: 18px;
+    font-weight: 400;
+    padding-left: 10px;
+    border-color: blue;
+}
+
+.h1_PerAccUs{
+    width: 297px;
+    height: 30px;
+    font-family: Bold;
+    font-weight: 700;
+    font-size: 24px;
+}
+.p_PerAccUs{
+    width: 296px;
+    font-family: Regular;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.PublicId_PerAccUs{
+    border-radius: 15px;
+width: 808px;
+height: 45px;
+background: #fff;
+margin-top: 10px;
+padding: 10px;
+font-family: bold;
+font-weight: 400;
+font-size: 18px;
+line-height: 139%;
+color: #a3a3a3;
+}
+
+.PublicInfoPerAccUs{
+    width: 1362px;
+    height: 202px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.button_create_event{
+    font-family: bold;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 111%;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.88);
+    border-radius: 10px;
+width: 319px;
+height: 56px;
+background: #463acb;
+margin-top: 50px;
+}
+
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .popup-content {
+    border-radius: 20px;
+    width: 547px;
+    height: 502px;
+    background: rgba(70, 58, 203, 0.1);
+
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+}
+
+.popup-title{
+    font-family: bold;
+font-weight: 700;
+font-size: 24px;
+line-height: 125%;
+text-transform: uppercase;
+text-align: center;
+color: #000;
+margin-top: 15px;
+}
+
+.popup-body{
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+}
+
+.popup-input{
+    width: 500px;
+    height: 48px;
+    border:none;
+    padding: 14px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.back{
+    border-radius: 20px;
+    width: 547px;
+    height: 502px;
+    background: #fff;
+}
+
+.popup_dates{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+    height: 48px;
+}
+
+.dates{
+    width: 230px;
+    height: 48px;
+}
+
+.popup-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500px;
+    height: 48px;
+    margin-top: 20px;
+    gap:20px
+}
+
+.popup-button{
+    width: 500px;
+    height: 48px;
+    font-family: bold;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 111%;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background: #463acb;
+    border-radius: 15px;
+    border: none;
+    padding: 12px 0;
+}
+
+.check_verify{
+    font-family: bold;
+font-weight: 600;
+font-size: 24px;
+line-height: 104%;
+text-align: center;
+color: #000;
+}
+
+.button_verify{
+    border: 1px solid #000;
+    border-radius: 15px;
+
+    height: 46px;
+    background: #fff;
+    font-family: bold;
+font-weight: 700;
+font-size: 18px;
+line-height: 111%;
+text-transform: uppercase;
+text-align: center;
+color: #000;
+padding: 12px 12px;
+}
+
+.DivGeneralRightEvent2{
+    width: 420px;
+    height: 164px;
+    display: flex;
+    flex-direction: column;
+}
+.DivButt_RightEvent2{
+    height: 52px;
+    width: 420px;
+}
+
+.Butt_RightEvent2{
+    width: 333px;
+    height: 52px;
+    background-color: #463ACB;
+    border-radius:15px ;
+    color: white;
+    font-family: Regular;
+    font-size: 24px;
+    font-weight: 400px;
+}
+
+.DivButt_RightEvent2{
+    display: flex;
+    align-items: center;
+}
+
+.right_event2{
+    height: 112px;
+    display: flex;
+    justify-content: left;
+    align-items: end;
+}
+
+.popup2-content {
+    border-radius: 20px;
+    width: 627px;
+    height: 740px;
+    background: rgba(70, 58, 203, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+}
+
+.back2{
+    border-radius: 20px;
+    width: 627px;
+    height: 740px;
+    background: #fff;
+}
+
+.popup2{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .popup2-p{
+    width: 500px;
+    height: 48px;
+    border:none;
+    padding: 14px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.dates2{
+    width: 230px;
+    height: 48px;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+    font-family: Regular;
+    font-weight: 400;
+    font-size: 18px;
+}
+.type_p{
+    width: 500px;
+    height: 48px;
+    background-color: white;
+    border-radius: 15px;
+    font-family: Regular;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.input-file[type=file]{
+    width: 350px;
+    color:#444;
+    padding: 5px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #555;
+}
+
+.input-file[type=file]::file-selector-button {
+    margin-right:20px;
+    border: none;
+    background:#084cdf;
+    padding:10px 20px;
+    border-radius: 10px;
+    color:#fff;
+    cursor:pointer;
+    transition: background .2s ease-in-out;
+}
+
+.input-file[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+}
+
+.LeftMenu_PerAccUsmain2{
+    width: 331px;
+    height: 300px;
+    background-color: rgba(70, 58, 203, 0.1);
+    border-radius: 20px;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+.search_input{
+    position: absolute;
+    left: 40%;
+    overflow-y: auto;
+    max-height: 100px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid black;
+}
+
+.search_result{
+    background-color:white;
+    color:black;
+    height: 25px;
+    width:300px;
+    text-align: left;
+    padding: 0 14px;
+}
+
+.popup3{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.back3{
+    border-radius: 20px;
+    width: 500px;
+    height: 370px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup3-content{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup3-textarea{
+    width: 450px;
+    height: 100px;
+    border: none;
+    padding: 14px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.popup3-body{
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup3-p{
+    width: 450px;
+    height: 55px;
+    border:none;
+    padding: 14px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.popup3-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    height: 48px;
+    margin-top: 20px;
+    gap:20px
+}
+
+.popup3-button{
+    width: 450px;
+    height: 48px;
+    font-family: bold;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 111%;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background: #463acb;
+    border-radius: 15px;
+    border: none;
+    padding: 12px 0;
+}
+
+.popup-link-file{
+    border-radius: 10px;
+padding: 20px;
+width: 241px;
+text-decoration: none;
+background: #463acb;
+font-family: bold;
+font-weight: 700;
+font-size: 18px;
+line-height: 111%;
+text-transform: uppercase;
+text-align: center;
+color: #fff;
+}
