@@ -12,13 +12,14 @@ import './OrganizationInfo.css';
 import TypeImg from '../static/img/TypeImg.png';
 import user_icon from '../static/img/user_icon.png';
 import MapOrganiz from "../components/MapOrganiz";
+import { useParams } from 'react-router-dom';
 
 function OrganizationInfo() {
     const navigate = useNavigate();
     
     const [organization , setOrganization] = useState([]);
     const [events , setEvents] = useState([]);
-    const id  = new URL(window.location.href).pathname.split('/')[3];
+    const {id}  = useParams()
     console.log(id);
 
     const[comments , setComments] = useState([]);

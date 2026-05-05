@@ -13,6 +13,7 @@ import ForgotPassword from './packages/forgotPassword.jsx';
 import ResetPassword from './packages/resetPassword.jsx';
 import OrganizationInfo from './packages/OrganizationInfo.jsx';
 import Analytics from './packages/Analytics.js';
+import EventDescription from './packages/EventDescription.jsx';
 
 //export const API_URL = "https://shadow7x.pythonanywhere.com/api/hacaton/";
 //export const API_MEDIA = "https://shadow7x.pythonanywhere.com";
@@ -37,6 +38,7 @@ root.render(
           <Route path = "/OrganizationInfo/:id" element={<OrganizationInfo/>} />
           <Route path="/event/:year/:month/:day" element={<UseEvents />} />
           <Route path="/Analytics" element={<Analytics />} />
+          <Route path="/EventDescription/:id" element={<EventDescription/>}/>
         </Routes>
     </BrowserRouter>
   // </React.StrictMode>

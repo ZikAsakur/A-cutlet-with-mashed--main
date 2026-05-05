@@ -84,13 +84,13 @@ export default function Analytics() {
           <>
             {orgLabels.length > 0 && (
               <div className="block-analytics-1">
-                <h2 className='h2-analytics'>города с самым большим количеством зафиксированных ивентов</h2>
+                <h2 className='h2-analytics'>Регионы с самым большим количеством зафиксированных ивентов</h2>
                 <Bar data={orgChartData} options={options} />
               </div>
             )}
             {personLabels.length > 0 && (
               <div className="block-analytics-2">
-                <h2 className='h2-analytics'>города с самым большим количеством участников</h2>
+                <h2 className='h2-analytics'>Регионы с самым большим количеством участников</h2>
                 <Bar data={personChartData} options={options} />
               </div>
             )}

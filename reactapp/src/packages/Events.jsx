@@ -113,7 +113,7 @@ function Events() {
                         })}
                         
                         <div className="many_event">
-                                <p className="p_many_event">Количество мероприятий в этот день: <span className="days_count"> {count}</span></p>
+                                <p className="p_many_event">Количество мероприятий: <span className="days_count"> {count}</span></p>
                         </div>
                         {count !==0 ? <a onClick={() => navigate(`/event/${year}/${month}/${day}`)}><button className="button_day">Показать</button></a> : <></>}
                         <p className="hiden">{count = 0}</p>

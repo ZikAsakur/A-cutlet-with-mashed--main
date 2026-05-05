@@ -640,3 +640,17 @@ def addComment(request: HttpRequest):
             return Response({'error': "Authorization header is missing"}, status=status.HTTP_401_UNAUTHORIZED)
     else:
         return Response({'error': 'Invalid request method'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
+    
+@api_view(['GET'])
+def getEventDescription(request: HttpRequest, id: int):
+    if request.method == 'GET':
+        try:
+            event = Event.objects.get(id = id)
+            
+            serializer = EventSerializer(event)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        except Event.DoesNotExist:
+            return Response({"error": "Event not found"}, status=404)
+    

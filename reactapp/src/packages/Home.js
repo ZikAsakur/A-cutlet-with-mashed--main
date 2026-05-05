@@ -45,17 +45,35 @@ function App() {
                   <h1 className="h1-block-2-2">{data.type}</h1>
                 </div>
               </div>
+              
               {
                 localStorage.getItem('token') 
                 ? (
+                  <>
                   <Link className='link_home' onClick={() => {
                     axios.post(API_URL + 'addEventToPerson', {id: data.id}, { headers: {'Authorization': 'Token ' + localStorage.getItem('token')} }).then(res => {
                       navigate('/personalAccountUser')
                     })
                   }}>Записаться</Link>
+
+                  <button
+                    className='link_home'
+                    onClick={() => navigate(`/EventDescription/${data.id}`)}
+                  >
+                    Подробнее
+                  </button>
+                  </>
                 )
                 : (
-                  <Link className='link_home' to="/login">Зарегистрироваться</Link>
+                  <>
+                  <Link className='link_home' to="/login">Войти</Link>
+                  <button
+                    className='link_home'
+                    onClick={() => navigate(`/EventDescription/${data.id}`)}
+                  >
+                    Подробнее
+                  </button>
+                  </>
                 )
               }
               
