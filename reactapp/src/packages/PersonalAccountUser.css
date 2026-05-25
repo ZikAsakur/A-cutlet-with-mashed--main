@@ -386,10 +386,10 @@
 
 .DivGeneralRightEvent{
     width: 420px;
-    height: 164px;
     display: flex;
     flex-direction: column;
-    gap: 45px;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .right_event{
@@ -400,24 +400,39 @@
 }
 
 .RightEvent_DeleteButt{
-    width:420px ;
-    height: 60px;
+    width: 100%;
+    max-width: 420px;
+    min-height: 60px;
+
     background-color: #463ACB;
     color: white;
+
     font-family: Regular;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 22px;
+
     border-radius: 15px;
     border: none;
+
+    cursor: pointer;
+    transition: 0.2s;
 }
 
+.RightEvent_DeleteButt:hover{
+    opacity: 0.9;
+}
 .date_event{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-top: 25px;
 }
-
+.RightEvent_CommentDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 .h1_event{
     font-family: Bold;
     font-size: 32px;
@@ -516,18 +531,18 @@ margin-top: 50px;
     z-index: 10;
   }
   
-  .popup-content {
+.popup-content {
     border-radius: 20px;
     width: 547px;
-    height: 502px;
+    min-height: 502px;
+    max-height: 90vh;
     background: rgba(70, 58, 203, 0.1);
-
-
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+padding-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-  
+    overflow-y: auto;
 }
 
 .popup-title{
@@ -541,14 +556,20 @@ color: #000;
 margin-top: 15px;
 }
 
-.popup-body{
+.popup-body {
     display: flex;
     margin-top: 10px;
     flex-direction: column;
     align-items: center;
     gap: 17px;
-}
 
+    overflow-y: auto;
+    max-height: 70vh;
+    
+}
+.popup-spacer {
+    height: 30px;
+}
 .popup-input{
     width: 500px;
     height: 48px;
@@ -558,11 +579,14 @@ margin-top: 15px;
     border-radius: 15px;
 }
 
-.back{
+.back {
     border-radius: 20px;
     width: 547px;
-    height: 502px;
+    min-height: 502px;
     background: #fff;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .popup_dates{
@@ -584,7 +608,6 @@ margin-top: 15px;
     justify-content: space-between;
     width: 500px;
     height: 48px;
-    margin-top: 20px;
     gap:20px
 }
 
@@ -875,4 +898,54 @@ line-height: 111%;
 text-transform: uppercase;
 text-align: center;
 color: #fff;
+}
+.popupReport{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10;
+}
+
+.backReport{
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.popupReport-content{
+    width: 620px;
+
+    background: rgba(70, 58, 203, 0.1);
+
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 25px;
+    gap: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.popupReport-content .popup2-p{
+    width: 100%;
+    min-height: 48px;
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 14px;
 }

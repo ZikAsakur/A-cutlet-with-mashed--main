@@ -46,7 +46,7 @@ class authorizedToken(Token):
     
 class persona (models.Model):
     sexs=[('Мужчина','Мужчина'),('Женщина','Женщина')]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=250 , blank=True, null=True)
     id_user = models.CharField(max_length=250 , blank=True, null=True)
     fio = models.CharField(max_length=250   , blank=True, null=True)
@@ -70,6 +70,11 @@ class Event(models.Model):
     verify = models.BooleanField(default=False)
     ended = models.BooleanField(default=False)
     
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='events/', blank=True, null=True)
+    source = models.CharField(max_length=500, null=True, blank=True)
+    
+    link = models.URLField(blank=True, null=True)
 class comment (models.Model):
     comment = models.CharField(max_length=250)
     persona = models.ForeignKey(persona, on_delete=models.CASCADE)
@@ -88,7 +93,7 @@ class personaEvents(models.Model):
         return f'{self.persona.user.username}'
     
 class report(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.OneToOneField(Event, on_delete=models.CASCADE)
     winner = models.ForeignKey(persona, on_delete=models.CASCADE)
     bolls = models.IntegerField()
     problems = models.TextField()

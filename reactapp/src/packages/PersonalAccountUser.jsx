@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {API_URL} from '../index'
+import {API_URL, API_MEDIA} from '../index'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import vector_bottom from '../static/img/стрелка.png';
@@ -9,7 +9,7 @@ import './PersonalAccountUser.css'
 import TypeImg from '../static/img/TypeImg.png';
 import Event from '../static/img/event.png';
 import { useNavigate } from 'react-router-dom';
-
+import Message from '../components/Message';
 export default function PersonalAccountUser() {
     const [email, setEmail] = useState('');
     const [user, setUser] = useState('');
@@ -35,6 +35,19 @@ export default function PersonalAccountUser() {
     const [search, setSearch] = useState('');
     const [selectPersona, setSelectPersona] = useState(-1)
     const [searchPerson , setSearchPerson] = useState(false)
+
+    const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState('');
+    const [popupReport, setPopupReport] = useState(false);
+
+    const [report, setReport] = useState({
+        event: null,
+        winner: null,
+        bolls: '',
+        problems: '',
+        helpers: '',
+        file: ''
+    });
 
     useEffect(() => {
         axios.get(API_URL + `getPersonas?search=${search}` , {  headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
@@ -107,35 +120,58 @@ export default function PersonalAccountUser() {
             }
         })
         .then(res =>{
-            console.log('Данные успешно обновлены', res,data);
+            setMessage(res.data.success);
+            setMessageType('success');
+            setTimeout(() => {
+                  setMessage('');
+              }, 3000);
         })
         .catch(err => {
-            console.error('Ошибка при обновлении данных:', err);
+            setMessage(err.response.data.error);
+            setMessageType('error');
+            setTimeout(() => {
+                  setMessage('');
+              }, 3000);
         });
     }
     function handleSubmit(e){
         e.preventDefault();
         const data = new FormData(e.target);
-        const formData = {
-            name: data.get('name'),
-            type: data.get('type'),
-            date_start: data.get('date_start'),
-            date_end: data.get('date_end'),
-            age_group: data.get('age_group'),
-            
-        };
-        axios.post(API_URL +'createEvent', formData, {  
-            headers: {
-                'Authorization': 'Token ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
+        const formData = new FormData();
+
+        formData.append('name', data.get('name'));
+        formData.append('type', data.get('type'));
+        formData.append('age_group', data.get('age_group'));
+        formData.append('date_start', data.get('date_start'));
+        formData.append('date_end', data.get('date_end'));
+
+        // новые поля
+        formData.append('description', data.get('description'));
+        formData.append('source', data.get('source'));
+        formData.append('link', data.get('link'));
+
+        formData.append('image', data.get('image'));
+
+        axios.post(API_URL + 'createEvent', formData, {
+        headers: {
+            'Authorization': 'Token ' + localStorage.getItem('token'),
+            'Content-Type': 'multipart/form-data'
             }
         })
         .then(res =>{
             setPopup(false);
-            console.log('Данные успешно добавлены', res,data);
+            setMessage('Мероприятие отправлено на рассмотрение');
+            setMessageType('success');
+            setTimeout(() => {
+                  setMessage('');
+              }, 3000);
         })
         .catch(err => {
-            console.error('Ошибка при добавлении данных:', err);
+            setMessage('Ошибка при добавлении данных:');
+            setMessageType('error');
+            setTimeout(() => {
+                  setMessage('');
+              }, 3000);
         });
     }
 
@@ -160,10 +196,19 @@ export default function PersonalAccountUser() {
             .then(res =>{
                 setPopup2(false);
                 window.location.reload()
-                console.log('Данные успешно добавлены', res,data);
+
+                setMessage('Отчёт успешно отправлен');
+                setMessageType('success');
+                setTimeout(() => {
+                  setMessage('');
+              }, 3000);
             })
             .catch(err =>{
-                console.error("Ошибка при добавлении данных:", err);
+                setMessage('Ошибка при добавлении');
+                setMessageType('error');
+                setTimeout(() => {
+                  setMessage('');
+              }, 3000);
             });
 
         }
@@ -184,11 +229,39 @@ export default function PersonalAccountUser() {
             .then(res =>{
                 setPopup3(false);
                 window.location.reload()
-                console.log('Комментарий успешно добавлен',res.data)
+                setMessage('Комментарий успешно отправлен');
+                setMessageType('success');
+                setTimeout(() => {
+                  setMessage('');
+              }, 3000);
             })
             .catch(err=>{
-                console.error("Ошибка при добавлении комментария:", err);
+                setMessage(err.response.data.error);
+                setMessageType('error');
+                setTimeout(() => {
+                  setMessage('');
+              }, 3000);
             })
+        }
+
+        function openReport(eventId) {
+            axios.get(API_URL + 'getReport/' + eventId, {
+                headers: {
+                    Authorization: 'Token ' + localStorage.getItem('token')
+                }
+            })
+            .then(res => {
+                setReport(res.data);
+                setPopupReport(true);
+            })
+            .catch(err => {
+                setMessage('Отчет не найден');
+                setMessageType('error');
+
+                setTimeout(() => {
+                    setMessage('');
+                }, 3000);
+            });
         }
 
 
@@ -197,6 +270,7 @@ export default function PersonalAccountUser() {
     return (
         <div className="wrapper">
             <Header/>
+            <Message text={message} type={messageType} />
         {lk === "persona" ?
         <div class="GeneralDiv_PerAccUs">
 
@@ -229,8 +303,8 @@ export default function PersonalAccountUser() {
                                 <p className="p_PerAccUs">данные, которые будут видны остальным пользователям</p>
                             </div>
                             <div className="PublicInfoInputs_PerAccUs">
-                                <input type="text" name = 'name' value ={user.name} className="PublicInputName_PerAccUs" placeholder='Придумайте себе имя пользователя' /> 
-                                <input type="text" name = 'id_user' value ={user.id_user} className="PublicInputId_PerAccUs" placeholder='Придумайте себе ID состоящий из букв и цифр' />
+                                <input type="text" name = 'name' defaultValue ={user.name} className="PublicInputName_PerAccUs" placeholder='Придумайте себе имя пользователя' /> 
+                                <input type="text" name = 'id_user' defaultValue ={user.id_user} className="PublicInputId_PerAccUs" placeholder='Придумайте себе ID состоящий из букв и цифр' />
                             </div>
                         </div>
                     </div>
@@ -242,11 +316,11 @@ export default function PersonalAccountUser() {
                                 <p className="p_PerAccUs">данные, которые будут использоваться для идентефицирования личности и подготовки сертификатов</p>
                             </div>
                             <div className="LocalInfoInputs_PerAccUs">
-                                <input type="text" name ='fio' value ={user.fio} className="LocalDataInputFIO_PerAccUs" placeholder='Введите ваше ФИО'/> 
+                                <input type="text" name ='fio' defaultValue ={user.fio} className="LocalDataInputFIO_PerAccUs" placeholder='Введите ваше ФИО'/> 
 
                                 <div className="DivLocalInfoPhoneBirthday_PerAccUs">
-                                    <input type="phone" name='phone' value ={user.phone} className="LocalDataInputPhoneBirthday_PerAccUs" placeholder='Введите ваш номер телефона' /> 
-                                    <input type="date" name ='born_date' value ={user.born_date} className="LocalDataInputPhoneBirthday_PerAccUs" placeholder='Введите ваш день рождения' /> 
+                                    <input type="phone" name='phone' defaultValue ={user.phone} className="LocalDataInputPhoneBirthday_PerAccUs" placeholder='Введите ваш номер телефона' /> 
+                                    <input type="date" name ='born_date' defaultValue ={user.born_date} className="LocalDataInputPhoneBirthday_PerAccUs" placeholder='Введите ваш день рождения' /> 
                                 </div>
 
                                 <div className="LocalInfoGender_PerAccUs">
@@ -285,9 +359,9 @@ export default function PersonalAccountUser() {
 
                             <div className="Location_PerAccUs">
                                 <div className="LocationInputs_PerAccUs">
-                                    <input type="text" name = 'country' value ={user.country} className="LocationInputContry_PerAccUs" placeholder='Введите вашу страну' />
-                                    <input type="text" name = 'region' value ={user.region} className="LocationInputRegion_PerAccUs" placeholder='Введите ваш регион' />
-                                    <input type="text" name = 'city' value ={user.city} className="LocationInputCity_PerAccUs" placeholder='Введите ваш город' />
+                                    <input type="text" name = 'country' defaultValue ={user.country} className="LocationInputContry_PerAccUs" placeholder='Введите вашу страну' />
+                                    <input type="text" name = 'region' defaultValue ={user.region} className="LocationInputRegion_PerAccUs" placeholder='Введите ваш регион' />
+                                    <input type="text" name = 'city' defaultValue ={user.city} className="LocationInputCity_PerAccUs" placeholder='Введите ваш город' />
                                 </div>
                             </div>
                         </div>
@@ -316,46 +390,87 @@ export default function PersonalAccountUser() {
                             {events.length === 0 ? (
                                 <h1 className="h1_notevent">Вы еще нигде не участвовали</h1>
                             ):(
-                            events.map((event) =>
-                                (<>
-                                    <div className="ListParticipation_PerAccUs">
+                            events.map((event) => (
+                                <div className="ListParticipation_PerAccUs" key={event.id}>
+
                                     <div className="card_event">
-                                        
+
                                         <div className="left_event">
                                             <p className="h1_event">{event.name}</p>
+
                                             <div className="type_event">
                                                 <img src={TypeImg} alt="" className="event_type_img"/>
                                                 <p className="p_event">{event.type}</p>
                                             </div>
+
                                             <div className="left_bottom_event">
                                                 <div className="date_event">
-                                                    <img src= {Event} alt="" width="35px" height="35px" />
-                                                    <p className="p_event">{event.date_start.split('-')[1]}.{event.date_start.split('-')[2]} - {event.date_end.split('-')[1]}.{event.date_end.split('-')[2]}</p>
+                                                    <img src={Event} alt="" width="35px" height="35px" />
+
+                                                    <p className="p_event">
+                                                        {event.date_start.split('-')[1]}.{event.date_start.split('-')[2]}
+                                                        -
+                                                        {event.date_end.split('-')[1]}.{event.date_end.split('-')[2]}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div className="DivGeneralRightEvent">
+
                                             <div className="RightEvent_CommentDiv">
-                                                <button className="RightEvent_DeleteButt" onClick ={() => {setPopup3(true)
-                                                    setPopupId(event.id);
-                                                } }>Написать комментарий</button>
-                                            </div>
-                                            <div className="right_event">
-                                                <button 
+
+                                                <button
+                                                    className="RightEvent_DeleteButt"
                                                     onClick={() => {
-                                                        axios.post(API_URL + 'removePersonEvent', {id: event.id} , {  headers: {'Authorization': 'Token ' + localStorage.getItem('token')}})
-                                                            .then(res => { 
-                                                                setEvents(prevEvents => prevEvents.filter(e => e.id !== event.id));
-                                                                }).catch(err =>{
-                                                                    console.error("Ошибка при удалении ивента:", err);
-                                                                });
-                                                            }} 
-                                                                className="RightEvent_DeleteButt" >Отменить</button>
+                                                        setPopup3(true)
+                                                        setPopupId(event.id);
+                                                    }}
+                                                >
+                                                    Написать комментарий
+                                                </button>
+
+                                                {event.ended && (
+                                                    <button
+                                                        className="RightEvent_DeleteButt"
+                                                        onClick={() => openReport(event.id)}
+                                                    >
+                                                        Результаты
+                                                    </button>
+                                                )}
+
                                             </div>
+
+                                            <div className="right_event">
+                                                <button
+                                                    onClick={() => {
+                                                        axios.post(
+                                                            API_URL + 'removePersonEvent',
+                                                            { id: event.id },
+                                                            {
+                                                                headers: {
+                                                                    'Authorization': 'Token ' + localStorage.getItem('token')
+                                                                }
+                                                            }
+                                                        )
+                                                        .then(() => {
+                                                            setEvents(prevEvents =>
+                                                                prevEvents.filter(e => e.id !== event.id)
+                                                            );
+                                                        });
+                                                    }}
+                                                    className="RightEvent_DeleteButt"
+                                                >
+                                                    Отменить
+                                                </button>
+                                            </div>
+
                                         </div>
+
                                     </div>
-                                    </div>
-                                </>))
+
+                                </div>
+                            ))
                                 
                             )}
                     </div>
@@ -458,7 +573,7 @@ export default function PersonalAccountUser() {
                 </>
                 : <>
                     <div className="MainDiv_PerAccUs">
-                        <h1 className="h1_Events_PerAccUs">Вы администратор и можете валидировать мероприятия</h1>
+                        <h1 className="h1_Events_PerAccUs">Валидация мероприятий</h1>
 
                         <div className="validate_event">
                             {notVerified.length === 0 ? (
@@ -514,6 +629,10 @@ export default function PersonalAccountUser() {
                             <input className="popup-input" type="text" name="name" placeholder="Название мероприятия" />
                             <input className="popup-input" type="text" name="type" placeholder="Тип мероприятия" />
                             <input className="popup-input" type="text" name="age_group" placeholder="Введите возрастную группу" />
+                            <input className="popup-input" type="text" name="description" placeholder="Описание мероприятия"/>
+                            <input className="popup-input" type="text" name="source" placeholder="Источник информации"/>
+                            <input className="popup-input" type="url" name="link" placeholder="Ссылка на мероприятие"/>
+                            <input className="popup-input" type="file" name="image"/>
                             <div className="popup_dates">
                                 <input className="dates popup-input" type="date" name="date_start" placeholder="Дата начала" />
                                 <input className="dates popup-input" type="date" name="date_end" placeholder="Дата окончания" />
@@ -524,8 +643,11 @@ export default function PersonalAccountUser() {
                             </div>
                         </form>
                     </div>
+
                 </div>
+            
             </div>
+            
             : null}
 
             {popup2 !== false ?
@@ -597,6 +719,58 @@ export default function PersonalAccountUser() {
                         </div>
                     </div>
             : null}
+            {popupReport && report.event && (
+                <div className="popupReport">
+                    <div className="backReport">
+                        <div className="popupReport-content">
+                            <h1 className="popup-title">
+                                Результаты мероприятия
+                            </h1>
+                            <p className='popup2-p'>
+                                Название: {report.event.name}
+                            </p>
+                            <p className='popup2-p'>
+                                Тип: {report.event.type}
+                            </p>
+                            {report.winner && (
+                                <p className='popup2-p'>
+                                    Победитель: {report.winner.fio}
+                                </p>
+                            )}
+                            <p className='popup2-p'>
+                                Баллы: {report.bolls}
+                            </p>
+                            <p className='popup2-p'>
+                                Проблемы: {report.problems}
+                            </p>
+                            <p className='popup2-p'>
+                                Помощники: {report.helpers}
+                            </p>
+                            {report.file && (
+                                <a
+                                    href={API_MEDIA + report.file}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="report-link"
+                                >
+                                    Скачать файл
+                                </a>
+                            )}
+
+                            <div className="popup-buttons">
+                                <button
+                                    className="popup-button"
+                                    onClick={() => setPopupReport(false)}
+                                >
+                                    Закрыть
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            )}
         </div>
         
 

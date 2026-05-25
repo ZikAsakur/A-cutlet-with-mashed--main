@@ -42,7 +42,7 @@ function submitHandler(e) {
               <p className="p-register">Придумайте пароль, потом вы сможете его поменять в личном кабинете.</p>
             </div>
             <div className='reg-check'> 
-              <input className='checkbox' type="checkbox" name="code" placeholder='Код'/>
+              <input required className='checkbox' type="checkbox" name="code" placeholder='Код'/>
                 <div className='p-register-un'>
                   <p className='p-register-un1'>Нажимая кнопку «Зарегистрироваться»: </p>
                   <p className='p-register-un1'>я принимаю условия пользовательского соглашения и даю согласие даю согласие на обработку моих персональных данных</p>

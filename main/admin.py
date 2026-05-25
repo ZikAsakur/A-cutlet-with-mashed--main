@@ -37,3 +37,7 @@ class personaEventsAdmin(admin.ModelAdmin):
 @admin.register(report)
 class reportAdmin(admin.ModelAdmin):
     list_display = ('event', 'winner')
+    
+@admin.register(comment)
+class reportAdmin(admin.ModelAdmin):
+    list_display = ('comment','persona', 'event')

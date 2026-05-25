@@ -13,6 +13,7 @@ import TypeImg from '../static/img/TypeImg.png';
 import user_icon from '../static/img/user_icon.png';
 import MapOrganiz from "../components/MapOrganiz";
 import { useParams } from 'react-router-dom';
+import Message from '../components/Message';
 
 function OrganizationInfo() {
     const navigate = useNavigate();
@@ -25,6 +26,8 @@ function OrganizationInfo() {
     const[comments , setComments] = useState([]);
     const[currentCommentIndex, setCurrentCommentIndex] = useState(0)
     
+    const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState('');
     useEffect(() => {
         
         axios.get(API_URL + 'getOrganizationInfo/'+id, {  headers: {'Authorization': 'Token ' + localStorage.getItem('token')}}).then(res =>  {
@@ -49,9 +52,20 @@ function OrganizationInfo() {
         return() => clearInterval(interval);
     },[comments]);
 
+    const canRegister = (dateStart) => {
+        const today = new Date();
+        const eventDate = new Date(dateStart);
+
+        today.setHours(0,0,0,0);
+        eventDate.setHours(0,0,0,0);
+
+        return today < eventDate;
+    };
+
     return (
         <div className="wrapper">
         <Header />
+        <Message text={message} type={messageType} />
         <div className="main">
             <h1 className="title">Представитель региона</h1>
             <div className="main_info">
@@ -90,7 +104,7 @@ function OrganizationInfo() {
                     <div className="event">
                         <div className="event_top">
                             <div className="date">
-                                <p className="day_start">{event.date_start.split('-')[1]}.{event.date_start.split('-')[2]} - {event.date_end.split('-')[1]}.{event.date_end.split('-')[2]}</p>
+                                <p className="day_start">{event.date_start.split('-')[2]}.{event.date_start.split('-')[1]} - {event.date_end.split('-')[2]}.{event.date_end.split('-')[1]}</p>
                                 
                             </div>
                             <div className="event_title">
@@ -109,21 +123,60 @@ function OrganizationInfo() {
                                 <img src={user_icon} alt="" className="event_type_img" />
                                 <p className="event_age_group_name">{event.age_group}</p>
                             </div>
-                            <div className="button-Sign-ovr">
-                            <button className="event_button" onClick={() => {
-                                if (!localStorage.getItem('token')) {
-                                    navigate('/Login');
-                                    return;
-                                }
-                                axios.post(API_URL + 'addEventToPerson' , {id: event.id} , {  headers: {'Authorization': 'Token ' + localStorage.getItem('token')}}).then(res => {
-                                    const data = res.data
-                                    navigate('/PersonalAccountUser');
-                                    console.log(data);
-                                }).catch(err => {
-                                    navigate('/PersonalAccountUser');
-                                })
-                            }}
-                                >Записаться</button>
+                            <div className="button_group3">
+                            {canRegister(event.date_start) && (
+                            <button
+                                className="event_button"
+                                onClick={() => {
+                                    if (!localStorage.getItem('token')) {
+                                        navigate('/Login');
+                                        return;
+                                    }
+
+                                    axios.post(
+                                        API_URL + 'addEventToPerson',
+                                        { id: event.id },
+                                        {
+                                            headers: {
+                                                'Authorization': 'Token ' + localStorage.getItem('token')
+                                            }
+                                        }
+                                    )
+                                    .then(res => {
+                                        setMessage('Вы успешно записались на мероприятие');
+                                        setMessageType('success');
+
+                                        setTimeout(() => {
+                                            setMessage('');
+                                        }, 3000);
+                                    })
+                                    .catch(err => {
+
+                                        if (err.response?.data?.error === 'You already have this event') {
+                                            setMessage('Вы уже записаны на это мероприятие');
+                                        } else {
+                                            setMessage('Ошибка при записи');
+                                        }
+
+                                        setMessageType('error');
+
+                                        setTimeout(() => {
+                                            setMessage('');
+                                        }, 3000);
+                                    });
+                                }}
+                            >
+                                Записаться
+                            </button>
+                        )}
+
+                                <button
+                                    className="event_button"
+                                    onClick={() => navigate(`/EventDescription/${event.id}`)}
+                                >
+                                    Подробнее
+                                </button>
+
                             </div>
                         </div>
                     </div>

@@ -183,68 +183,83 @@ def logout(request : HttpRequest):
     
     
 @api_view(["POST"])
-def redactPersonal(request:HttpRequest):
+def redactPersonal(request: HttpRequest):
     if request.method == "POST":
+
         data = json.loads(request.body)
-        if request.headers.get('Authorization'):
-            token = request.headers.get('Authorization').split(' ')[1]
-            try:
-                if 'name' in data :
-                    name = data['name']
-                else:
-                    name = ''
-                if 'id_user' in data :
-                    id_user = data['id_user']
-                else:
-                    id_user = ''
-                if 'fio' in data :
-                    fio = data['fio']
-                else:
-                    fio = ''
-                if 'phone' in data :
-                    phone = data['phone']
-                else:
-                    phone = ''
-                if 'born_date' in data :
-                    born_date = data['born_date']
-                else:
-                    born_date = ''
-                if 'sex' in data :
-                    sex = data['sex']
-                else:
-                    sex = ''
-                if 'country' in data :
-                    country = data['country']
-                else:
-                    country = ''
-                if 'region' in data :
-                    region = data['region']
-                else:
-                    region = ''
-                if 'city' in data :
-                    city = data['city']
-                else:
-                    city = ''
-                user = authorizedToken.objects.get(key=token).user
-                personal = persona.objects.get(user = user)
-                print(personal)
-                personal.name = name
-                personal.id_user = id_user
-                personal.fio = fio
-                personal.phone = phone
-                personal.born_date = born_date
-                personal.sex = sex
-                personal.country = country
-                personal.region = region
-                personal.city = city
-                personal.save_base()
-                
-                return Response(status=status.HTTP_202_ACCEPTED)
-            except Exception as e:
-                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-                
-        else:
-            return Response({'error': "Authorization header is missing"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        if not request.headers.get('Authorization'):
+            return Response(
+                {'error': 'Вы не авторизованы'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        token = request.headers.get('Authorization').split(' ')[1]
+
+        try:
+            name = data.get('name', '').strip()
+            id_user = data.get('id_user', '').strip()
+            fio = data.get('fio', '').strip()
+            phone = data.get('phone', '').strip()
+            born_date = data.get('born_date', '').strip()
+            sex = data.get('sex', '').strip()
+            country = data.get('country', '').strip()
+            region = data.get('region', '').strip()
+            city = data.get('city', '').strip()
+
+            if (
+                not name or
+                not id_user or
+                not fio or
+                not phone or
+                not born_date or
+                not sex or
+                not country or
+                not region or
+                not city
+            ):
+                return Response(
+                    {'error': 'Заполните все поля'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            user = authorizedToken.objects.get(key=token).user
+            personal = persona.objects.get(user=user)
+
+            if persona.objects.filter(name=name).exclude(id=personal.id).exists():
+                return Response(
+                    {'error': 'Такое имя пользователя уже существует'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            if persona.objects.filter(id_user=id_user).exclude(id=personal.id).exists():
+                return Response(
+                    {'error': 'Такой ID уже существует'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            personal.name = name
+            personal.id_user = id_user
+            personal.fio = fio
+            personal.phone = phone
+            personal.born_date = born_date
+            personal.sex = sex
+            personal.country = country
+            personal.region = region
+            personal.city = city
+
+            personal.save()
+
+            return Response(
+                {'success': 'Данные успешно обновлены'},
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
                 
             
     
@@ -252,12 +267,20 @@ def redactPersonal(request:HttpRequest):
 def getTekEvent(request: HttpRequest):
     if request.method == 'GET':
         try:
-            event = Event.objects.filter(Q(date_start__gte = datetime.datetime.today()) &Q(verify = True)).order_by('date_start').first()
-            
-            serializer = EventSerializer(event)
-            return Response(serializer.data , status=status.HTTP_200_OK)
+            events = Event.objects.filter(
+                Q(date_start__gte=datetime.datetime.today()) &
+                Q(verify=True)
+            ).order_by('date_start')[:3]
+
+            serializer = EventSerializer(events, many=True)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
 @api_view(['POST'])
 def createEvent(request: HttpRequest):
@@ -270,9 +293,19 @@ def createEvent(request: HttpRequest):
                 return Response({'error': 'You are not an organization'}, status=status.HTTP_401_UNAUTHORIZED)
             organ = organization.objects.get(user = authorizedToken.objects.get(key=token).user)
             data = request.data
+            image = request.FILES.get('image')
             if 'name' in data and 'date_start' in data and 'date_end' in data and 'type' in data and 'age_group' in data:
                 try:
-                    event = Event.objects.create(name = data['name'], date_start = data['date_start'], date_end = data['date_end'], type = data['type'], age_group = data['age_group'])
+                    event = Event.objects.create(
+                        name = data['name'], 
+                        date_start = data['date_start'], 
+                        date_end = data['date_end'], 
+                        type = data['type'], 
+                        age_group = data['age_group'],
+                        description=data.get('description'),
+                        source=data.get('source'),
+                        link=data.get('link'),
+                        image=request.FILES.get('image'))
                     if OrganizationsEvents.objects.filter(organization = organ).exists():
                         OrganizationsEvents.objects.get(organization = organ).events.add(event)
                     else:
@@ -546,7 +579,7 @@ def addReport(request: HttpRequest):
                             person = persona.objects.get(id = int(data['winner']))
                             report.objects.create(bolls = data['bolls'], problems = data['problems'], helpers = data['helpers'], event = event, winner = person, file = file)
                             event.ended = True
-                            event.save_base()
+                            event.save()
                             return Response(status=status.HTTP_200_OK)
                         else:
                             return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
@@ -605,29 +638,58 @@ def getMostPopularOrganizationsEvents(request: HttpRequest):
     
 @api_view(['POST'])
 def addComment(request: HttpRequest):
+    
     if request.method == 'POST':
         if request.headers.get('Authorization'):
             print(request.headers.get('Authorization').split(' '))
             token = request.headers.get('Authorization').split(' ')[1]
             print(token)
+            
             if not authorizedToken.objects.filter(key=token).exists():
                 return Response({'error': 'Invalid token'}, status=status.HTTP_401_UNAUTHORIZED)
+            
             if not persona.objects.filter(user = authorizedToken.objects.get(key=token).user).exists():
                 return Response({'error': 'You are not a persona'}, status=status.HTTP_401_UNAUTHORIZED)
+            
             perso = persona.objects.get(user = authorizedToken.objects.get(key=token).user)
             data = request.data
             print(data)
+            
             if 'id' in data:
                 try:
                     event = Event.objects.get(id = int(data['id']))
+                    
                     if personaEvents.objects.filter(persona = perso , events = event).exists():
                         if 'text' in data:
-                            if comment.objects.filter(persona = perso , event = event).exists():
-                                return Response({'error': 'You already have this comment'}, status=status.HTTP_400_BAD_REQUEST)
-                            commne = comment.objects.create(persona = perso, event = event, comment = data['text'])
-                            if OrganizationsEvents.objects.filter(events = event).exists():
-                                org = OrganizationsEvents.objects.filter(events = event).first().comments.add(commne)
-                            return Response(status=status.HTTP_200_OK)
+
+                            text = data['text'].strip()
+
+                            if not text:
+                                return Response(
+                                    {'error': 'Текст комментария не может быть пустым'},
+                                    status=status.HTTP_400_BAD_REQUEST
+                                )
+
+                            if comment.objects.filter(persona=perso, event=event).exists():
+                                return Response(
+                                    {'error': 'Вы уже оставили комментарий'},
+                                    status=status.HTTP_400_BAD_REQUEST
+                                )
+
+                            commne = comment.objects.create(
+                                persona=perso,
+                                event=event,
+                                comment=text
+                            )
+
+                            if OrganizationsEvents.objects.filter(events=event).exists():
+                                org = OrganizationsEvents.objects.filter(events=event).first()
+                                org.comments.add(commne)
+
+                            return Response(
+                                {'success': 'Комментарий успешно добавлен'},
+                                status=status.HTTP_200_OK
+                            )
                         else:
                             return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
                     else:

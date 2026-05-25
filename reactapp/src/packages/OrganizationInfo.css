@@ -242,20 +242,29 @@ color: #000;
 }
 
 .event_button{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 251px;
     height: 50px;
     background: #463acb;
     border-radius: 10px;
+
     font-weight: 700;
     font-size: 18px;
-    line-height: 111%;
     text-transform: uppercase;
     color: #fff;
+
     border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: opacity 0.2s ease;
+    
+}
+
+.event_button:hover{
+    opacity: 0.8;
 }
 
 .OrganizationComment{
@@ -311,10 +320,13 @@ color: #000;
     justify-content: center;
     gap: 10px;
 }
-.button-Sign-ovr{
+.button_group3{
     width: 342px;
     display: flex;
-    flex-direction: column-reverse;
-    height: 50px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
     height: 170px;
+    margin-top: 15px;
 }
