@@ -1,7 +1,6 @@
 {
   "name": "reactapp",
   "version": "0.1.0",
-  "homepage": "https://shadow7x.github.io/hacaton/",
   "private": true,
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.5",
