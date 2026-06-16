@@ -14,31 +14,11 @@ from .sendEmail import getEmailCode
 from .sendEmail import sendRestorePassword
 from datetime import datetime
 import random
-from .parser import getInfo
-from .parser import getLastIvents
 
 import datetime
 
 
 # Create your views here.
-
-
-# data = getInfo.get_ruks()
-# organization.objects.all().delete()
-# for i in data:
-#     user = User.objects.create_user(username=i[2], password='admin')
-#     organization.objects.create(region=i[0],fio=i[1],email=i[2],user =user)
-
-# data = getLastIvents.get_last_events()
-# lastIvent.objects.all().delete()
-# for i in data:
-#     print(22)
-#     lastIvent.objects.create(city=i['city'],mens=i['mens'],discipline=i['discipline'],title=i['title'],format=i['format'], date_start = i['dates'][0] ,date_end= i['dates'][1]if len(i['dates']) > 1 else None)
-    
-
-
-
-
 
 @api_view(['POST'])
 def register(request : HttpRequest):
