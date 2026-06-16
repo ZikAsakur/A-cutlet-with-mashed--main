@@ -15,10 +15,10 @@ import OrganizationInfo from './packages/OrganizationInfo.jsx';
 import Analytics from './packages/Analytics.js';
 import EventDescription from './packages/EventDescription.jsx';
 
-//export const API_URL = "https://shadow7x.pythonanywhere.com/api/hacaton/";
-//export const API_MEDIA = "https://shadow7x.pythonanywhere.com";
- export const API_URL = "http://localhost:8000/api/hacaton/";  
- export const API_MEDIA = "http://localhost:8000";
+export const API_URL = "https://gilzea.pythonanywhere.com/api/hacaton/";
+export const API_MEDIA = "https://gilzea.pythonanywhere.com";
+//export const API_URL = "http://localhost:8000/api/hacaton/";  
+//export const API_MEDIA = "http://localhost:8000";
 
 
 const basename = '/hacaton';
