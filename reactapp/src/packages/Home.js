@@ -16,6 +16,14 @@ function App() {
   const [events, setEvents] = React.useState([]);
   const [message, setMessage] = React.useState('');
   const [messageType, setMessageType] = React.useState('');
+  const token = localStorage.getItem('token');
+  const isRegistrationOpen = (dateStart) => {
+    const today = new Date();
+    const start = new Date(dateStart);
+    
+    return today < start;
+    };
+
 
   useEffect(() => {
   axios.get(API_URL + 'getTekEvent')
@@ -62,7 +70,8 @@ function App() {
                       Подробнее
                     </button>
 
-                    {localStorage.getItem('token') ? (
+                    {token ? (
+                      isRegistrationOpen(event.date_start) && (
                       <button
                         className="link_home"
                         onClick={() => {
@@ -72,22 +81,17 @@ function App() {
                             { id: event.id },
                             {
                               headers: {
-                                Authorization: 'Token ' + localStorage.getItem('token')
+                                Authorization: 'Token ' + token
                               }
                             }
                           )
                           .then(() => {
-
                             setMessage('Вы успешно записались на мероприятие');
                             setMessageType('success');
 
-                            setTimeout(() => {
-                              setMessage('');
-                            }, 3000);
-
+                            setTimeout(() => setMessage(''), 3000);
                           })
                           .catch(err => {
-
                             if (err.response?.data?.error === 'You already have this event') {
                               setMessage('Вы уже записаны на это мероприятие');
                             } else {
@@ -95,22 +99,19 @@ function App() {
                             }
 
                             setMessageType('error');
-
-                            setTimeout(() => {
-                              setMessage('');
-                            }, 3000);
-
+                            setTimeout(() => setMessage(''), 3000);
                           });
 
                         }}
                       >
                         Записаться
                       </button>
-                    ) : (
-                      <Link className="link_home" to="/login">
-                        Войти
-                      </Link>
-                    )}
+                    )
+                  ) : (
+                    <Link className="link_home" to="/login">
+                      Войти
+                    </Link>
+                  )}
                   </div>
                 </div>
 

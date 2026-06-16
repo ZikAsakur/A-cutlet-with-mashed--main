@@ -17,6 +17,13 @@ function EventDescription() {
     return `${day}.${month}.${year}`;
     };
 
+    const isRegistrationOpen = () => {
+        if (!event?.date_start) return false;
+        const today = new Date();
+        const start = new Date(event.date_start);
+    return today <= start;
+    };
+
     useEffect(() => {
         axios.get(API_URL + 'getEventDescription/' + id, {
             headers: {
@@ -50,8 +57,16 @@ function EventDescription() {
 
             <div className="event-right">
 
-                <div className="event-status">
-                    Регистрация открыта
+                <div className="event-top-row">
+                    <div className="event-status">
+                        {isRegistrationOpen() ? 'Регистрация открыта' : 'Регистрация закрыта'}
+                    </div>
+
+                    {event.organization && (
+                        <div className="event-org">
+                            {event.organization.region}
+                        </div>
+                    )}
                 </div>
 
                 <h1 className="event-title">{event.name}</h1>

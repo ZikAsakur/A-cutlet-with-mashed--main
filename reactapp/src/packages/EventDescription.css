@@ -103,3 +103,26 @@
     line-height: 1.5;
     color: #333;
 }
+
+.event-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.event-status {
+    padding: 6px 14px;
+    background: #463acb;
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.event-org {
+    font-size: 14px;
+    color: #666;
+    background: rgba(70, 58, 203, 0.1);
+    padding: 4px 10px;
+    border-radius: 10px;
+}

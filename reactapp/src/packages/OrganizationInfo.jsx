@@ -52,14 +52,11 @@ function OrganizationInfo() {
         return() => clearInterval(interval);
     },[comments]);
 
-    const canRegister = (dateStart) => {
-        const today = new Date();
-        const eventDate = new Date(dateStart);
-
-        today.setHours(0,0,0,0);
-        eventDate.setHours(0,0,0,0);
-
-        return today < eventDate;
+    const isRegistrationOpen = (dateStart) => {
+    const today = new Date();
+    const start = new Date(dateStart);
+    
+    return today < start;
     };
 
     return (
@@ -124,7 +121,7 @@ function OrganizationInfo() {
                                 <p className="event_age_group_name">{event.age_group}</p>
                             </div>
                             <div className="button_group3">
-                            {canRegister(event.date_start) && (
+                            {isRegistrationOpen(event.date_start) && (
                             <button
                                 className="event_button"
                                 onClick={() => {

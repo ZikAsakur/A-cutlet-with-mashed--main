@@ -366,18 +366,8 @@ export default function PersonalAccountUser() {
                             </div>
                         </div>
                     </div>
-
-                    <div className="GeneralChangePassword_PerAccUs">
-                        <div className='ChangePassword_PerAccUs'>
-                            <div className="ChangePasswordInfo_PerAccUs">
-                                <h1 className="h1_PerAccUs">Смена пароля</h1>
-                                <p className="p_PerAccUs">При нажатии на кнопку смены пароля,вам на почту придет ссылка для подтвеждения и выбора нового пароля</p>
-                            </div>
-                            <div className="DivChange_PerrAccUs">
-                                <button className="ButtChange_PerrAccUs" type = "submit" >Сменить пароль</button>
-                            </div>
-                        </div>    
-                    </div>
+                    
+                    
 
                     <div className="DivSave_PerAccUs">
                         <button className="ButtSave_PerAccUs" type ="submit">СОХРАНИТЬ ДАННЫЕ</button>
@@ -408,9 +398,9 @@ export default function PersonalAccountUser() {
                                                     <img src={Event} alt="" width="35px" height="35px" />
 
                                                     <p className="p_event">
-                                                        {event.date_start.split('-')[1]}.{event.date_start.split('-')[2]}
+                                                        {event.date_start.split('-')[2]}.{event.date_start.split('-')[1]}
                                                         -
-                                                        {event.date_end.split('-')[1]}.{event.date_end.split('-')[2]}
+                                                        {event.date_end.split('-')[2]}.{event.date_end.split('-')[1]}
                                                     </p>
                                                 </div>
                                             </div>
@@ -547,7 +537,7 @@ export default function PersonalAccountUser() {
                                             <div className="left_bottom_event">
                                                 <div className="date_event">
                                                     <img src= {Event} alt="" width="35px" height="35px" />
-                                                    <p className="p_event">{event.date_start.split('-')[1]}.{event.date_start.split('-')[2]} - {event.date_end.split('-')[1]}.{event.date_end.split('-')[2]}</p>
+                                                    <p className="p_event">{event.date_start.split('-')[2]}.{event.date_start.split('-')[1]} - {event.date_end.split('-')[2]}.{event.date_end.split('-')[1]}</p>
                                                 </div>
                                             </div>
                                         </div>
