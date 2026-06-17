@@ -25,9 +25,9 @@ function UseEvents() {
     const [messageType, setMessageType] = useState('');
 
     const url = new URL(window.location.href);
-    const year = url.pathname.split('/')[3];
-    const month = url.pathname.split('/')[4];
-    const day = url.pathname.split('/')[5];
+    const year = url.pathname.split('/')[2];
+    const month = url.pathname.split('/')[3];
+    const day = url.pathname.split('/')[4];
 
     const fetchEvents = async () => {
         try {
